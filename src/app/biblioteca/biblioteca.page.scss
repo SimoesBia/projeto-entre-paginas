@@ -1,0 +1,103 @@
+.biblioteca {
+  min-height: 100%;
+  padding: 1rem;
+  background: var(--app-color-background, #f4f1fa);
+  color: #251d38;
+}
+
+.busca,
+.categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.busca label {
+  width: 100%;
+  font-weight: 600;
+}
+
+.busca input {
+  flex: 1;
+  min-width: 10rem;
+  border: 1px solid #817298;
+  border-radius: 0.5rem;
+  padding: 0.65rem;
+  background: #fff;
+  color: inherit;
+}
+
+button {
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #453170;
+}
+
+.busca button,
+button[aria-pressed='true'] {
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+}
+
+button:disabled {
+  opacity: 0.55;
+}
+
+.livros {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.livro {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.capa {
+  position: relative;
+  display: grid;
+  flex: 0 0 4rem;
+  place-items: center;
+  height: 6rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background: #e8defa;
+  font-size: 0.75rem;
+}
+
+.capa img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #e8defa;
+}
+
+.dados h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.dados p {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+}
+
+.mensagem-destaque:empty {
+  margin: 0;
+}
+
+.botao-destaque {
+  margin-top: 0.4rem;
+  background: #f0e9ff;
+  text-align: left;
+}

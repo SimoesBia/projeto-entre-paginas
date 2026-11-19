@@ -26,7 +26,18 @@
         <h2>Uma nova história espera por você!</h2>
         <p>Conheça nossa escolha especial e embarque nessa leitura.</p>
       </div>
-      <div class="livro-icone">📖</div>
+      @let livro = livroDestaque();
+      <figure class="livro-destaque">
+        @if (livro.capaUrl) {
+          <img [src]="livro.capaUrl" alt="" width="80" height="120" />
+        } @else {
+          <span aria-hidden="true">📖</span>
+        }
+        <figcaption>
+          <strong>{{ livro.titulo }}</strong>
+          <span>{{ livro.autores.join(', ') || 'Autor não informado' }}</span>
+        </figcaption>
+      </figure>
     </section>
 
     <section class="atalhos">

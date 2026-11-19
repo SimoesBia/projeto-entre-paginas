@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   IonHeader,
@@ -11,6 +11,7 @@ import {
 
 import { CardInterativo } from '../directives/card-interativo';
 import { DestaqueDirective } from '../directives/destaque';
+import { DestaqueMensalService } from '../services/destaque-mensal.service';
 
 @Component({
   selector: 'app-home',
@@ -27,4 +28,6 @@ import { DestaqueDirective } from '../directives/destaque';
     DestaqueDirective
   ],
 })
-export class HomePage {}
+export class HomePage {
+  readonly livroDestaque = inject(DestaqueMensalService).livro;
+}
