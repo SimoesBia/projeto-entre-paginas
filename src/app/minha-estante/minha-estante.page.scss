@@ -1,0 +1,213 @@
+
+:host {
+  color-scheme: light;
+}
+
+ion-content {
+  --background: #f4f1fa;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+  --color: #30243d;
+}
+
+ion-title {
+  color: #30243d;
+}
+
+.estante-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 18px 48px;
+  color: #30243d;
+}
+
+.introducao,
+.formulario,
+.vazio {
+  padding: 22px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  background: #faf7ff;
+  color: #30243d;
+}
+
+.introducao h1,
+.introducao h2,
+.introducao p,
+.formulario h2,
+.vazio h2,
+.vazio p,
+.grupo-status h2,
+.informacoes-livro h3,
+.informacoes-livro p {
+  color: #30243d;
+}
+
+.introducao .sobretitulo {
+  color: #7950a5;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.introducao h1 {
+  margin: 8px 0;
+  font-size: 1.8rem;
+}
+
+.introducao p {
+  line-height: 1.5;
+}
+
+.introducao strong {
+  color: #70449b;
+}
+
+.formulario h2,
+.grupo-status h2 {
+  margin-top: 0;
+}
+
+.formulario ion-item {
+  --background: #ffffff;
+  --color: #30243d;
+  --border-color: #ded4eb;
+  margin-bottom: 8px;
+}
+
+.formulario ion-label {
+  --color: #554563;
+  color: #554563;
+}
+
+.formulario ion-input,
+.formulario ion-select {
+  --color: #30243d;
+  --placeholder-color: #80758b;
+}
+
+.formulario ion-button {
+  margin-top: 16px;
+}
+
+.mensagem {
+  color: #68418e;
+  font-weight: 600;
+}
+
+.vazio {
+  text-align: center;
+  padding: 36px 20px;
+}
+
+.vazio > span {
+  font-size: 2.5rem;
+}
+
+.grupo-status {
+  margin: 28px 0;
+}
+
+.titulo-grupo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titulo-grupo span {
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #eee5f8;
+  color: #68418e;
+  font-weight: 700;
+}
+
+.sem-livros {
+  padding: 14px;
+  color: #51465b;
+  background: #faf8fc;
+  border-radius: 12px;
+}
+
+.lista-livros {
+  display: grid;
+  gap: 14px;
+}
+
+.livro-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 14px;
+  color: #30243d;
+}
+
+.informacoes-livro {
+  min-width: 0;
+  flex: 1;
+  color: #30243d;
+}
+
+.informacoes-livro h3 {
+  margin: 0 0 5px;
+  font-size: 1.05rem;
+}
+
+.informacoes-livro p {
+  margin: 0 0 8px;
+  color: #554b60;
+}
+
+.capa-livro {
+  display: grid;
+  place-items: center;
+  flex: 0 0 54px;
+  height: 76px;
+  border-radius: 8px;
+  background: #e8def4;
+  font-size: 1.8rem;
+}
+
+.etiqueta-status {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #49345f;
+}
+
+.informacoes-livro label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  color: #554563;
+}
+
+.informacoes-livro select {
+  max-width: 100%;
+  padding: 7px;
+  border: 1px solid #d6c9e3;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #30243d;
+}
+
+.remover {
+  display: block;
+  margin-top: 10px;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  color: #a33c55;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (min-width: 650px) {
+  .lista-livros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

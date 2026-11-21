@@ -1,13 +1,90 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>minha-estante</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Minha Estante</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">minha-estante</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <main class="estante-container">
+    <section class="introducao" appRealceEstante>
+      <span class="sobretitulo">SUA JORNADA DE LEITURA</span>
+      <h1>Minha Estante 📚</h1>
+      <p>Organize seus livros e acompanhe cada etapa das suas leituras.</p>
+      <strong>{{ livros().length }} livro(s) na sua estante</strong>
+    </section>
+
+    <section class="formulario" aria-labelledby="titulo-adicionar">
+      <h2 id="titulo-adicionar">Adicionar um livro</h2>
+      <form (ngSubmit)="adicionarLivro()">
+        <ion-item>
+          <ion-label position="stacked">Título do livro</ion-label>
+          <ion-input name="titulo" [(ngModel)]="titulo" placeholder="Ex.: A biblioteca da meia-noite" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Autor</ion-label>
+          <ion-input name="autor" [(ngModel)]="autor" placeholder="Nome do autor (opcional)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Status inicial</ion-label>
+          <ion-select name="statusNovo" [(ngModel)]="statusNovo" interface="popover">
+            @for (status of statusDisponiveis; track status) {
+              <ion-select-option [value]="status">{{ status }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+        <ion-button expand="block" type="submit" [disabled]="!titulo.trim()">Adicionar à estante</ion-button>
+      </form>
+      @if (mensagem) {
+        <p class="mensagem" role="status">{{ mensagem }}</p>
+      }
+    </section>
+
+    @if (livros().length === 0) {
+      <section class="vazio" appRealceEstante>
+        <span aria-hidden="true">📖</span>
+        <h2>Sua estante está vazia</h2>
+        <p>Adicione seu primeiro livro e comece a organizar suas leituras.</p>
+      </section>
+    } @else {
+      @for (status of statusDisponiveis; track status) {
+        <section class="grupo-status">
+          <div class="titulo-grupo">
+            <h2>{{ status }}</h2>
+            <span>{{ livrosPorStatus(status).length }}</span>
+          </div>
+
+          @if (livrosPorStatus(status).length === 0) {
+            <p class="sem-livros">Nenhum livro nesta categoria ainda.</p>
+          } @else {
+            <div class="lista-livros">
+              @for (livro of livrosPorStatus(status); track livro.id) {
+                <article class="livro-card" [appStatusLeitura]="livro.status" appRealceEstante>
+                  <div class="capa-livro" aria-hidden="true">📘</div>
+                  <div class="informacoes-livro">
+                    <h3>{{ livro.titulo }}</h3>
+                    <p>{{ livro.autores.join(', ') || 'Autor não informado' }}</p>
+                    <span class="etiqueta-status">{{ livro.status }}</span>
+                    <label [for]="'status-' + livro.id">Alterar status</label>
+                    <select
+                      [id]="'status-' + livro.id"
+                      [value]="livro.status"
+                      (change)="atualizarStatus(livro.id, $any($event.target).value)"
+                    >
+                      @for (opcao of statusDisponiveis; track opcao) {
+                        <option [value]="opcao">{{ opcao }}</option>
+                      }
+                    </select>
+                    <button class="remover" type="button" (click)="removerLivro(livro.id)">Remover</button>
+                  </div>
+                </article>
+              }
+            </div>
+          }
+        </section>
+      }
+    }
+  </main>
 </ion-content>
