@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Clube de Leitura</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="clube">
+    <section class="introducao">
+      <span class="etiqueta">ENTRE PÁGINAS</span>
+      <h1>Nosso Clube de Leitura</h1>
+      <p>Leia no seu ritmo, descubra novas histórias e participe dos desafios da comunidade.</p>
+    </section>
+
+    <section class="livro-do-mes" aria-labelledby="titulo-livro-mes">
+      <div class="livro-texto">
+        <span class="etiqueta">LIVRO DO MÊS</span>
+        <h2 id="titulo-livro-mes">{{ livroDoMes().titulo }}</h2>
+        <p>{{ livroDoMes().autores.join(', ') || 'Autor não informado' }}</p>
+        <p class="observacao">Esta é a obra escolhida como destaque da biblioteca.</p>
+      </div>
+      <div class="capa-livro" aria-label="Capa do livro do mês">
+        <span aria-hidden="true">📖</span>
+        @if (livroDoMes().capaUrl) {
+          <img [src]="livroDoMes().capaUrl" [alt]="'Capa de ' + livroDoMes().titulo" />
+        }
+      </div>
+    </section>
+
+    <section class="metas" aria-labelledby="titulo-metas">
+      <div class="titulo-secao">
+        <div>
+          <span class="etiqueta">ACOMPANHAMENTO</span>
+          <h2 id="titulo-metas">Sua meta de leitura</h2>
+        </div>
+        <strong>{{ totalConcluidos() }} de {{ desafios().length }}</strong>
+      </div>
+      <p>Desafios concluídos</p>
+      <div
+        class="barra-progresso"
+        role="progressbar"
+        [attr.aria-valuenow]="totalConcluidos()"
+        [attr.aria-valuemin]="0"
+        [attr.aria-valuemax]="desafios().length"
+        aria-label="Progresso dos desafios de leitura"
+      >
+        <span [style.width.%]="porcentagemConcluida()"></span>
+      </div>
+      <p class="texto-progresso">{{ porcentagemTexto() }}% concluído</p>
+    </section>
+
+    <section class="lista-desafios" aria-labelledby="titulo-desafios">
+      <span class="etiqueta">PARTICIPE</span>
+      <h2 id="titulo-desafios">Desafios do clube</h2>
+
+      @if (desafios().length === 0) {
+        <p>Nenhum desafio disponível no momento.</p>
+      } @else {
+        @for (desafio of desafios(); track desafio.id) {
+          <article class="desafio" [class.concluido]="desafio.concluido">
+            <div class="desafio-conteudo">
+              <h3>{{ desafio.titulo }}</h3>
+              <p>{{ desafio.descricao }}</p>
+              <small>{{ desafio.meta }}</small>
+            </div>
+            <button
+              type="button"
+              [attr.aria-pressed]="desafio.concluido"
+              (click)="alternarDesafio(desafio.id)"
+            >
+              {{ desafio.concluido ? 'Concluído ✓' : 'Concluir desafio' }}
+            </button>
+          </article>
+        }
+      }
+    </section>
+  </main>
+</ion-content>

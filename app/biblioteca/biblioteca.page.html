@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Biblioteca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="biblioteca" aria-label="Catálogo de livros">
+    <form class="busca" role="search" (ngSubmit)="buscar()">
+      <label for="busca-livros">Buscar livros</label>
+      <input
+        id="busca-livros"
+        name="termo"
+        type="search"
+        [(ngModel)]="termo"
+        placeholder="Título, autor ou palavra-chave"
+      />
+      <button type="submit" [disabled]="!termo.trim()">Buscar</button>
+    </form>
+
+    <div class="categorias" role="group" aria-label="Categorias">
+      @for (categoria of categorias; track categoria.assunto) {
+      <button
+        type="button"
+        [attr.aria-pressed]="categoriaAtiva() === categoria.assunto"
+        (click)="selecionarCategoria(categoria.assunto)"
+      >
+        {{ categoria.nome }}
+      </button>
+      }
+    </div>
+
+    <p role="status" class="mensagem-destaque">{{ mensagemDestaque() }}</p>
+
+    @let consulta = estado(); @if (consulta.tipo === 'carregando') {
+    <p role="status">Carregando livros…</p>
+    } @else if (consulta.tipo === 'erro') {
+    <p role="alert">Não foi possível carregar os livros da Open Library.</p>
+    <button type="button" (click)="tentarNovamente()">Tentar de novo</button>
+    } @else if (consulta.tipo === 'resultado') { @if (!consulta.livros.length) {
+    <p role="status">Nenhum livro encontrado. Tente outro termo ou escolha uma categoria.</p>
+    } @else {
+    <ul class="livros" aria-label="Livros encontrados">
+      @for (livro of consulta.livros; track livro.id) {
+      <li class="livro">
+        <div class="capa" aria-hidden="true">
+          <span>Sem capa</span>
+          @if (livro.capaUrl) {
+          <img [src]="livro.capaUrl" alt="" loading="lazy" (error)="ocultarCapa($event)" />
+          }
+        </div>
+        <div class="dados">
+          <h2>{{ livro.titulo }}</h2>
+          <p>{{ livro.autores.join(', ') || 'Autor não informado' }}</p>
+          @if (livro.anoPrimeiraPublicacao) {
+          <p>{{ livro.anoPrimeiraPublicacao }}</p>
+          }
+          <a class="botao-detalhes" [routerLink]="['/detalhes', livro.id]">
+            Ver detalhes
+          </a>
+          <button
+            class="botao-destaque"
+            type="button"
+            [disabled]="livroDestaque().id === livro.id"
+            (click)="definirDestaque(livro)"
+          >
+            {{ livroDestaque().id === livro.id ? 'Destaque atual' : 'Definir como destaque' }}
+          </button>
+        </div>
+      </li>
+      }
+    </ul>
+    } }
+  </section>
+</ion-content>

@@ -1,0 +1,75 @@
+
+
+<ion-header>
+  <ion-toolbar color="primary" class="logo-toolbar">
+    <ion-title class="logo-title">
+      <img
+        src="assets/logo-entre-paginas.png"
+        alt="Entre Páginas"
+      />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="home-container">
+
+    <section class="boas-vindas">
+      <span>SEU ESPAÇO DE LEITURA</span>
+      <h1>Olá, leitor! </h1>
+      <p>“O livro traz a vantagem de a gente poder estar só e ao mesmo tempo acompanhado.”</p>
+    </section>
+
+    <section class="livro-mes" appDestaque>
+      <div>
+        <span class="etiqueta">DESTAQUE DO MÊS</span>
+        <h2>Uma nova história espera por você!</h2>
+        <p>Conheça nossa escolha especial e embarque nessa leitura.</p>
+      </div>
+      @let livro = livroDestaque();
+      <figure class="livro-destaque">
+        @if (livro.capaUrl) {
+          <img [src]="livro.capaUrl" alt="" width="80" height="120" />
+        } @else {
+          <span aria-hidden="true">📖</span>
+        }
+        <figcaption>
+          <strong>{{ livro.titulo }}</strong>
+          <span>{{ livro.autores.join(', ') || 'Autor não informado' }}</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="atalhos">
+      <h2>Explore o aplicativo</h2>
+
+      <div class="atalho" appCardInterativo routerLink="/biblioteca">
+        <span>🔎</span>
+        <div>
+          <h3>Biblioteca</h3>
+          <p>Encontre seu próximo livro favorito.</p>
+        </div>
+      </div>
+
+      <div class="atalho" appCardInterativo routerLink="/minha-estante">
+        <span>📚</span>
+        <div>
+          <h3>Minha Estante</h3>
+          <p>Organize suas leituras.</p>
+        </div>
+      </div>
+
+      <div class="atalho" appCardInterativo routerLink="/clube" >
+        <span>💬</span>
+        <div>
+          <h3>Clube de Leitura</h3>
+          <p>Participe de desafios e novidades.</p>
+        </div>
+      </div>
+    </section>
+ <ion-button routerLink="/sobre" expand="block" color="primary">
+   Conheça nosso projeto
+  </ion-button>
+
+  </div>
+</ion-content>
