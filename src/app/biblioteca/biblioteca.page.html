@@ -54,7 +54,7 @@
         </div>
         <div class="dados">
           <h2>{{ livro.titulo }}</h2>
-          <p>{{ livro.autores.join(', ') || 'Autor não informado' }}</p>
+          <p>{{ livro.autores | autoresFormatados }}</p>
           @if (livro.anoPrimeiraPublicacao) {
           <p>{{ livro.anoPrimeiraPublicacao }}</p>
           }
@@ -66,6 +66,7 @@
           >
             {{ livroDestaque().id === livro.id ? 'Destaque atual' : 'Definir como destaque' }}
           </button>
+          <a class="link-detalhes" [routerLink]="['/detalhes', livro.id]">Ver detalhes</a>
         </div>
       </li>
       }

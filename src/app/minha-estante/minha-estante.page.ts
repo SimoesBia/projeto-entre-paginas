@@ -20,6 +20,9 @@ import { StatusLeituraDirective } from '../directives/status-leitura.directive';
 import type { LivroResumo } from '../models/livro';
 import { BibliotecaService, type StatusLeitura } from '../services/biblioteca.service';
 
+import { DatePipe, UpperCasePipe } from '@angular/common';
+import { AutoresFormatadosPipe } from '../pipes/autores-formatados.pipe';
+
 @Component({
   selector: 'app-minha-estante',
   templateUrl: './minha-estante.page.html',
@@ -40,6 +43,9 @@ import { BibliotecaService, type StatusLeitura } from '../services/biblioteca.se
     IonToolbar,
     RealceEstanteDirective,
     StatusLeituraDirective,
+    DatePipe,
+    UpperCasePipe,
+    AutoresFormatadosPipe,
   ],
 })
 export class MinhaEstantePage {

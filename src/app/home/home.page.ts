@@ -13,6 +13,8 @@ import { CardInterativo } from '../directives/card-interativo';
 import { DestaqueDirective } from '../directives/destaque';
 import { DestaqueMensalService } from '../services/destaque-mensal.service';
 
+import { AutoresFormatadosPipe } from '../pipes/autores-formatados.pipe';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -25,7 +27,8 @@ import { DestaqueMensalService } from '../services/destaque-mensal.service';
     IonButton,
     RouterLink,
     CardInterativo,
-    DestaqueDirective
+    DestaqueDirective,
+    AutoresFormatadosPipe,
   ],
 })
 export class HomePage {

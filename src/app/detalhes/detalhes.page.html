@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/biblioteca"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes do livro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="detalhes">
+    @let consulta = estado();
+
+    @if (consulta.tipo === 'carregando') {
+      <p class="mensagem" role="status">Carregando informações do livro...</p>
+    } @else if (consulta.tipo === 'erro') {
+      <section class="mensagem erro" role="alert">
+        <h1>Não foi possível carregar este livro.</h1>
+        <p>Verifique se o endereço contém um identificador válido e tente novamente pela Biblioteca.</p>
+      </section>
+    } @else {
+      <section class="cabecalho-livro">
+        <div class="capa" aria-label="Capa do livro">
+          <span aria-hidden="true">📖</span>
+          @if (consulta.livro.capaUrl) {
+            <img
+              [src]="consulta.livro.capaUrl"
+              [alt]="'Capa de ' + consulta.livro.titulo"
+              (error)="ocultarCapa($event)"
+            />
+          }
+        </div>
+        <div class="titulo-livro">
+          <span class="etiqueta">DETALHES DA OBRA</span>
+          <h1>{{ consulta.livro.titulo }}</h1>
+          <p>Informações fornecidas pela Open Library.</p>
+        </div>
+      </section>
+
+      <section class="informacao">
+        <h2>Sinopse</h2>
+        <p>{{ consulta.livro.sinopse | resumoSinopse:260 }}</p>
+      </section>
+
+      <section class="informacao">
+        <h2>Assuntos relacionados</h2>
+        @if (consulta.livro.assuntos.length === 0) {
+          <p>Não há assuntos cadastrados para esta obra.</p>
+        } @else {
+          <ul class="assuntos">
+            @for (assunto of consulta.livro.assuntos.slice(0, 12); track assunto) {
+              <li>{{ assunto | uppercase }}</li>
+            }
+          </ul>
+        }
+      </section>
+
+      <p class="identificador">Identificador da obra: {{ consulta.livro.id }}</p>
+    }
+  </main>
+</ion-content>

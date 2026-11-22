@@ -35,7 +35,7 @@
         }
         <figcaption>
           <strong>{{ livro.titulo }}</strong>
-          <span>{{ livro.autores.join(', ') || 'Autor não informado' }}</span>
+          <span>{{ livro.autores | autoresFormatados }}</span>
         </figcaption>
       </figure>
     </section>
