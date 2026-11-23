@@ -19,7 +19,7 @@
       <div class="livro-texto">
         <span class="etiqueta">LIVRO DO MÊS</span>
         <h2 id="titulo-livro-mes">{{ livroDoMes().titulo }}</h2>
-        <p>{{ livroDoMes().autores.join(', ') || 'Autor não informado' }}</p>
+        <p>{{ livroDoMes().autores | autoresFormatados }}</p>
         <p class="observacao">Esta é a obra escolhida como destaque da biblioteca.</p>
       </div>
       <div class="capa-livro" aria-label="Capa do livro do mês">
