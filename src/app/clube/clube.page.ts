@@ -3,6 +3,8 @@ import { IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar 
 
 import { DestaqueMensalService } from '../services/destaque-mensal.service';
 
+import { AutoresFormatadosPipe } from '../pipes/autores-formatados.pipe';
+
 interface Desafio {
   id: number;
   titulo: string;
@@ -15,7 +17,7 @@ interface Desafio {
   selector: 'app-clube',
   templateUrl: './clube.page.html',
   styleUrls: ['./clube.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, AutoresFormatadosPipe,],
 })
 export class ClubePage {
   private readonly destaqueMensal = inject(DestaqueMensalService);
