@@ -3,10 +3,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons } from '@ionic/angular';
 import { BehaviorSubject, catchError, map, of, startWith, switchMap } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 import type { LivroResumo } from '../models/livro';
 import { DestaqueMensalService } from '../services/destaque-mensal.service';
 import { LivroService } from '../services/livro.service';
+
+import { AutoresFormatadosPipe } from '../pipes/autores-formatados.pipe';
 
 type Consulta = { tipo: 'assunto' | 'busca'; valor: string };
 type Estado = { tipo: 'carregando' | 'erro' } | { tipo: 'resultado'; livros: LivroResumo[] };
@@ -15,7 +18,7 @@ type Estado = { tipo: 'carregando' | 'erro' } | { tipo: 'resultado'; livros: Liv
   selector: 'app-biblioteca',
   templateUrl: './biblioteca.page.html',
   styleUrls: ['./biblioteca.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, FormsModule],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, FormsModule, AutoresFormatadosPipe, RouterLink,],
 })
 export class BibliotecaPage {
   private readonly destaqueMensal = inject(DestaqueMensalService);

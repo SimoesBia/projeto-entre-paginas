@@ -65,8 +65,9 @@
                   <div class="capa-livro" aria-hidden="true">📘</div>
                   <div class="informacoes-livro">
                     <h3>{{ livro.titulo }}</h3>
-                    <p>{{ livro.autores.join(', ') || 'Autor não informado' }}</p>
-                    <span class="etiqueta-status">{{ livro.status }}</span>
+                    <p>{{ livro.autores | autoresFormatados }}</p>
+                    <span class="etiqueta-status">{{ livro.status | uppercase }}</span>
+                    <p class="data-adicao">Adicionado em: {{ livro.adicionadoEm | date:'dd/MM/yyyy' }}</p>
                     <label [for]="'status-' + livro.id">Alterar status</label>
                     <select
                       [id]="'status-' + livro.id"
